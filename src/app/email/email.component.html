@@ -1,0 +1,58 @@
+<div class="header">
+    <h1>Email Feature in Angular</h1>
+    <p>(using ngx-chips & angular-editor)</p>
+</div>
+
+<form #form="ngForm">
+    <div class="container ">
+        <fieldset>
+            <div class="row class-spacing">
+                <div class="col-2">
+                    To
+                </div>
+                <div class="col-8 set-border">
+                    <tag-input [ngModel]="toEmails" [displayBy]="'label'" [identifyBy]="'label'" [theme]="'bootstrap'"
+                        name="toEmails" placeholder="+ To" [separatorKeyCodes]="[32, 188]" secondaryPlaceholder="To"
+                        [errorMessages]="errorMessages" [validators]="validators"  removable="true">
+                        
+                        <tag-input-dropdown [dynamicUpdate]="false" [zIndex]="10000" [displayBy]="'label'"
+                            [identifyBy]="'label'" [showDropdownIfEmpty]="true" [autocompleteItems]="availableEmails">
+
+                            <ng-template let-item="item" let-index="index">
+                                {{ item.label }}
+                            </ng-template>
+                        </tag-input-dropdown>
+
+                    </tag-input>
+                </div>
+            </div>
+
+            <div class="row class-spacing">
+                <div class="col-2"> <label>Subject</label></div>
+                <div class="col-8 class-float">
+                    <input type="text" class="form-control" placeholder="Enter subject" required="true" name="subject"
+                        [ngModel]="subject" />
+                </div>
+            </div>
+
+            <div class="row class-spacing">
+                <div class="col-md-12">
+                    <angular-editor [placeholder]="'Enter text here...'" [ngModel]="body"
+                        [config]="config" name="body"></angular-editor>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+</form>
+
+<div class="row  text-right">
+    <div class="col-md-12">
+        <span>
+            <button class="btn btn-success mr-25" (click)="sendEmail()">
+                Send Email
+            </button>
+        </span>
+    </div>
+
+</div>
